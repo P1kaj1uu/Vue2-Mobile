@@ -67,7 +67,10 @@ export default {
         Notify({ type: 'success', message: '登录成功' })
         // 调用设置token的方法
         setToken(res.data.data.token)
-        console.log(res)
+        // 跳转到首页
+        // push会产生历史记录，可以回退；而replace不会产生历史记录，不可以回退
+        this.$router.replace('/layout/home')
+        // console.log(res)
       } catch (err) {
         Notify({ type: 'danger', message: '手机号或密码错误' })
         // 登录失败也关闭
