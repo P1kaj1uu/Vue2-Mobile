@@ -2,9 +2,7 @@
 const key = 'itnews'
 
 // 设置token
-export const setToken = (token) => {
-  localStorage.setItem(key, token)
-}
+export const setToken = (token) => localStorage.setItem(key, token)
 
 // 获取token
 export const getToken = () => localStorage.getItem(key)
