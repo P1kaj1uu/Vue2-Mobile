@@ -19,13 +19,13 @@ export const loginAPI = ({ mobile, code }) => axios({
   }
 })
 
-// 获取所有频道
+// 所有频道
 export const getAllChannelsAPI = () => axios({
   url: '/v1_0/channels',
   method: 'GET'
 })
 
-// 获取用户的频道
+// 用户的频道
 export const getUserChannelAPI = () => axios({
   url: '/v1_0/user/channels',
   method: 'GET',
@@ -34,7 +34,7 @@ export const getUserChannelAPI = () => axios({
   }
 })
 
-// 获取文章新闻推荐
+// 文章新闻推荐
 export const articlesListAPI = ({ channel_id, timestamp }) => axios({
   url: '/v1_0/articles',
   method: 'GET',
@@ -47,7 +47,7 @@ export const articlesListAPI = ({ channel_id, timestamp }) => axios({
   }
 })
 
-// 获取对文章不喜欢的
+// 对文章不喜欢的
 export const articleDislikeAPI = (target) => axios({
   url: '/v1_0/article/dislikes',
   method: 'POST',
@@ -60,7 +60,7 @@ export const articleDislikeAPI = (target) => axios({
   }
 })
 
-// 获取举报文章
+// 举报文章
 export const articleReportsAPI = ({ target, type }) => axios({
   url: '/v1_0/article/reports',
   method: 'POST',
@@ -72,5 +72,28 @@ export const articleReportsAPI = ({ target, type }) => axios({
     target,
     type,
     remark: '暂无'
+  }
+})
+
+// 更新频道
+export const updateChannelAPI = ({ channels }) => axios({
+  url: '/v1_0/user/channels',
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    channels
+  }
+})
+
+// 删除指定用户频道
+export const deleteChannelAPI = (target) => axios({
+  url: `/v1_0/user/channels/${target}`,
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + getToken()
   }
 })
