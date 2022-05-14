@@ -8,6 +8,7 @@ import Home from '../views/Home/index.vue'
 import User from '../views/User/index.vue'
 import Search from '../views/Search/index.vue'
 import SearchResult from '../views/Search/SearchResult.vue'
+import ArticleDetail from '../views/ArticleDetail/index.vue'
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,8 @@ const routes = [
     ]
   },
   { path: '/search', component: Search },
-  { path: '/search/:keywords', component: SearchResult }
+  { path: '/search/:keywords', component: SearchResult },
+  { path: '/detail', component: ArticleDetail }
 ]
 
 const router = new VueRouter({

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 一条文章单元格 -->
-    <van-cell>
+    <van-cell @click="cellClickFn">
       <!-- 标题区域的插槽 -->
       <template #title>
         <div class="title-box">
@@ -43,7 +43,7 @@
             <span>{{ obj.pubdate }}</span>
           </div>
           <!-- 反馈按钮 -->
-          <van-icon name="cross" @click="onCloseClick" v-if="isShow" />
+          <van-icon name="cross" @click.stop="onCloseClick" v-if="isShow" />
         </div>
       </template>
     </van-cell>
@@ -134,6 +134,10 @@ export default {
     onClose () {
       this.actions = firstActions
       this.cancelText = '取消'
+    },
+    // 点击文章单元格时，跳转文章详情页面
+    cellClickFn () {
+      this.$router.push(`/detail?aid=${this.obj.art_id}`)
     }
   }
 }

@@ -116,3 +116,58 @@ export const searchResultListAPI = ({ page, q }) => axios({
     q
   }
 })
+
+// 获取新闻详情
+export const articleDetailAPI = ({ article_id }) => axios({
+  url: `/v1_0/articles/${article_id}`,
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 关注用户
+export const followedUserAPI = ({ target }) => axios({
+  url: '/v1_0/user/followings',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    target
+  }
+})
+
+// 取消关注用户
+export const unFollowedUserAPI = ({ target }) => axios({
+  url: `/v1_0/user/followings/${target}`,
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 对文章点赞
+export const articleLikeAPI = ({ target }) => axios({
+  url: '/v1_0/article/likings',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    target
+  }
+})
+
+// 取消对文章点赞
+export const articleDisLikeAPI = ({ target }) => axios({
+  url: `/v1_0/article/likings/${target}`,
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + getToken()
+  }
+})
