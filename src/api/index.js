@@ -97,3 +97,22 @@ export const deleteChannelAPI = (target) => axios({
     Authorization: 'Bearer ' + getToken()
   }
 })
+
+// 获取联想建议（自动补全）
+export const suggestListAPI = ({ q }) => axios({
+  url: '/v1_0/suggestion',
+  method: 'GET',
+  params: {
+    q
+  }
+})
+
+// 获取搜索结果
+export const searchResultListAPI = ({ page, q }) => axios({
+  url: '/v1_0/search',
+  method: 'GET',
+  params: {
+    page,
+    q
+  }
+})

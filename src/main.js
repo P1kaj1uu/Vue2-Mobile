@@ -12,6 +12,15 @@ Vue.use(Vant)
 
 Vue.config.productionTip = false
 
+// 自定义全局自定义指令
+Vue.directive('focus', {
+  inserted (el) {
+    // 获取input输入框元素
+    const theInput = el.querySelector('input')
+    theInput.focus()
+  }
+})
+
 new Vue({
   router,
   store,

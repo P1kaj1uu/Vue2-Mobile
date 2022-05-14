@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ArticleItem from '../components/ArticleItem.vue'
+import ArticleItem from '../../../components/ArticleItem.vue'
 import { articlesListAPI } from '../../../api/index.js'
 // 导入封装时间格式的方法
 import { timeAgo } from '../../../utils/day.js'

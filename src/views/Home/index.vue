@@ -7,7 +7,7 @@
           <img :src="imgHome" alt="IT头条" />
         </template>
         <template #right>
-          <van-icon name="search" size="0.48rem" />
+          <van-icon name="search" size="0.48rem" @click="ToSearch" />
         </template>
       </van-nav-bar>
     </div>
@@ -97,6 +97,10 @@ export default {
     // 跳转对应的频道内容
     changeFn (obj) {
       this.channelId = obj.id
+    },
+    // 点击搜索图标跳转搜索页面
+    ToSearch () {
+      this.$router.push('/search')
     }
   }
 }

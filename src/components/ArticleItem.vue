@@ -8,20 +8,30 @@
           <!-- 标题 -->
           <span>{{ obj.title }}</span>
           <!-- 单图 -->
-          <img
+          <!-- <img
             class="thumb"
             :src="obj.cover.images[0]"
             v-if="obj.cover.type === 1"
-          />
+          /> -->
+          <van-image class="thumb" :src="obj.cover.images[0]" v-if="obj.cover.type === 1">
+            <template v-slot:error>暂无图片</template>
+          </van-image>
         </div>
         <!-- 三张图片 -->
         <div class="thumb-box" v-if="obj.cover.type > 1">
-          <img
+          <!-- <img
             class="thumb"
             v-for="(imgUrl, index) in obj.cover.images"
             :key="index"
             :src="imgUrl"
-          />
+          /> -->
+          <van-image
+          class="thumb"
+          v-for="(imgUrl, index) in obj.cover.images"
+          :key="index"
+          :src="imgUrl">
+            <template v-slot:error>暂无图片</template>
+          </van-image>
         </div>
       </template>
       <!-- label 区域的插槽 -->
@@ -33,7 +43,7 @@
             <span>{{ obj.pubdate }}</span>
           </div>
           <!-- 反馈按钮 -->
-          <van-icon name="cross" @click="onCloseClick" />
+          <van-icon name="cross" @click="onCloseClick" v-if="isShow" />
         </div>
       </template>
     </van-cell>
@@ -53,8 +63,8 @@
 
 <script>
 import { Notify } from 'vant'
-import { firstActions, secondActions } from '../../../api/report.js'
-import { articleDislikeAPI, articleReportsAPI } from '../../../api/index.js'
+import { firstActions, secondActions } from '../api/report.js'
+import { articleDislikeAPI, articleReportsAPI } from '../api/index.js'
 
 export default {
   name: 'ArticleItem',
@@ -65,6 +75,10 @@ export default {
       default () {
         return {}
       }
+    },
+    isShow: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
