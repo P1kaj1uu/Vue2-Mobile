@@ -47,15 +47,25 @@
         >
       </div>
     </div>
+
+    <!-- 文章评论区域 -->
+    <div>
+      <comment-list></comment-list>
+    </div>
   </div>
 </template>
 
 <script>
 // 导入封装的api方法
 import { articleDetailAPI, followedUserAPI, unFollowedUserAPI, articleLikeAPI, articleDisLikeAPI } from '../../api/index'
+// 导入需要的组件
+import CommentList from './CommentList.vue'
 
 export default {
   name: 'ArticleDetail',
+  components: {
+    CommentList
+  },
   data () {
     return {
       // 用于存储文章详情数据

@@ -20,6 +20,12 @@ Vue.directive('focus', {
     theInput.focus()
   }
 })
+Vue.directive('autoFocus', {
+  inserted (el) {
+    // 为textarea自动聚焦
+    el.focus()
+  }
+})
 
 new Vue({
   router,

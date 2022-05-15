@@ -171,3 +171,52 @@ export const articleDisLikeAPI = ({ target }) => axios({
     Authorization: 'Bearer ' + getToken()
   }
 })
+
+// 获取评论
+export const commentListAPI = ({ source, offset = null, limit = 10 }) => axios({
+  url: '/v1_0/comments',
+  method: 'GET',
+  params: {
+    type: 'a',
+    source,
+    offset,
+    limit
+  }
+})
+
+// 对文章发布评论
+export const sendCommentAPI = ({ target, content }) => axios({
+  url: '/v1_0/comments',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    target,
+    content
+  }
+})
+
+// 对评论点赞
+export const commentLikingAPI = ({ target }) => axios({
+  url: '/v1_0/comment/likings',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    target
+  }
+})
+
+// 对评论取消点赞
+export const commentDisLikingAPI = ({ target }) => axios({
+  url: `/v1_0/comment/likings/${target}`,
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + getToken()
+  }
+})

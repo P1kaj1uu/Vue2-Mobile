@@ -51,6 +51,11 @@ export default {
     timeAgo: timeAgo,
     // 底部加载事件
     async onLoad () {
+      if (this.articleList.length === 0) {
+        this.loading = false
+        // 阻止后续代码执行
+        return
+      }
       const res = await articlesListAPI({
         channel_id: this.cid,
         // 默认用系统时间，展示第一页的数据
