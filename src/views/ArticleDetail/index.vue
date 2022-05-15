@@ -50,7 +50,7 @@
 
     <!-- 文章评论区域 -->
     <div>
-      <comment-list></comment-list>
+      <comment-list :hold="artDetailList"></comment-list>
     </div>
   </div>
 </template>

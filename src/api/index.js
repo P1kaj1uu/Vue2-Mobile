@@ -220,3 +220,26 @@ export const commentDisLikingAPI = ({ target }) => axios({
     Authorization: 'Bearer ' + getToken()
   }
 })
+
+// 收藏文章
+export const holdArticleAPI = ({ target }) => axios({
+  url: '/v1_0/article/collections',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    target
+  }
+})
+
+// 取消收藏文章
+export const holdDisArticleAPI = ({ target }) => axios({
+  url: `/v1_0/article/collections/${target}`,
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + getToken()
+  }
+})

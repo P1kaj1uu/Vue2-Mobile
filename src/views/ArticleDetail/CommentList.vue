@@ -62,7 +62,8 @@
           <van-badge :content="totalCount" max="99">
             <van-icon name="comment-o" size="0.53333334rem" @click="moveFn" />
           </van-badge>
-          <van-icon name="star-o" size="0.53333334rem" />
+          <van-icon name="star-o" size="0.53333334rem" v-if="hold.is_collected === false" @click="holdFn(false)" />
+          <van-icon name="star" color="red" size="0.53333334rem" v-else @click="holdFn(true)" />
           <van-icon name="share-o" size="0.53333334rem" />
         </div>
       </div>
@@ -87,12 +88,14 @@
 
 <script>
 // 导入封装的api方法
-import { commentListAPI, sendCommentAPI, commentLikingAPI, commentDisLikingAPI } from '../../api/index'
+import { commentListAPI, sendCommentAPI, commentLikingAPI, commentDisLikingAPI, holdArticleAPI, holdDisArticleAPI } from '../../api/index'
 // 导入时间格式化方法
 import { timeAgo } from '../../utils/day'
 
 export default {
   name: 'CommentList',
+  // 父传子，自定义属性，获取是否收藏该文章
+  props: ['hold'],
   data () {
     return {
       // 用于存储评论列表数据
@@ -119,6 +122,7 @@ export default {
       })
       // 当网络请求成功时
       if (res.status === 200) {
+        console.log(res)
         this.commentList = res.data.data.results
         this.lastId = res.data.data.last_id
         // 有评论则展示评论数，无评论则不展示评论数
@@ -196,6 +200,23 @@ export default {
         }
       } else {
         this.loading = false
+      }
+    },
+    // 当点击收藏/取消收藏
+    async holdFn (bool) {
+      // 当前状态是收藏
+      if (bool) {
+        // 取消收藏
+        this.hold.is_collected = false
+        await holdDisArticleAPI({
+          target: this.$route.query.aid
+        })
+      } else {
+        // 保存收藏
+        this.hold.is_collected = true
+        await holdArticleAPI({
+          target: this.$route.query.aid
+        })
       }
     }
   },
