@@ -243,3 +243,68 @@ export const holdDisArticleAPI = ({ target }) => axios({
     Authorization: 'Bearer ' + getToken()
   }
 })
+
+// 获取用户的关注列表
+export const getUserFollowedAPI = () => axios({
+  url: '/v1_0/user/followings',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 获取用户的粉丝列表
+export const getUserFanAPI = () => axios({
+  url: '/v1_0/user/followers',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 获取用户自己信息
+export const getUserInfoAPI = () => axios({
+  url: '/v1_0/user',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 获取用户个人资料
+export const getUserDataAPI = () => axios({
+  url: '/v1_0/user/profile',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer ' + getToken()
+  }
+})
+
+// 编辑用户照片资料
+export const editUserPhotoAPI = (fd) => axios({
+  url: '/v1_0/user/photo',
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: 'Bearer ' + getToken()
+  },
+  // fd是调用接口时传递的表单对象
+  data: fd
+})
+
+// 编辑用户个人资料
+export const editUserDataAPI = ({ name, gender, birthday, real_name, intro }) => axios({
+  url: '/v1_0/user/profile',
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken()
+  },
+  data: {
+    name,
+    gender,
+    birthday,
+    real_name,
+    intro
+  }
+})

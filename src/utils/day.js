@@ -16,3 +16,11 @@ export const timeAgo = (targetTime) => {
   var b = dayjs(targetTime)
   return a.to(b) // 返回多久之前...
 }
+
+export const moment = (moment) => {
+  // 格式化时间
+  dayjs.extend(relativeTime)
+  dayjs.locale('zh')
+  // 返回格式xxxx-xx-xx格式
+  return dayjs(moment).format('YYYY-MM-DD')
+}
