@@ -12,6 +12,7 @@ import ArticleDetail from '../views/ArticleDetail/index.vue'
 import UserEdit from '../views/User/UserEdit.vue'
 import UserFollow from '../views/User/UserFollow.vue'
 import UserFan from '../views/User/UserFan.vue'
+import Chat from '../views/Chat/index.vue'
 
 Vue.use(VueRouter)
 
@@ -32,7 +33,8 @@ const routes = [
   { path: '/detail', component: ArticleDetail },
   { path: '/user_edit', component: UserEdit },
   { path: '/user_follow', component: UserFollow },
-  { path: '/user_fan', component: UserFan }
+  { path: '/user_fan', component: UserFan },
+  { path: '/chat', component: Chat }
 ]
 
 const router = new VueRouter({
