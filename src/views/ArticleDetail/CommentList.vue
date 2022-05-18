@@ -122,7 +122,6 @@ export default {
       })
       // 当网络请求成功时
       if (res.status === 200) {
-        console.log(res)
         this.commentList = res.data.data.results
         this.lastId = res.data.data.last_id
         // 有评论则展示评论数，无评论则不展示评论数

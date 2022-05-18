@@ -76,7 +76,8 @@ export default {
       }).catch(() => {})
     }
   },
-  async created () {
+  // 把created换成activated钩子函数,解决编辑资料后不更新的问题
+  async activated () {
     // 调用获取用户自己信息
     const res = await getUserInfoAPI()
     if (res.status === 200) {

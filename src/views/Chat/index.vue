@@ -73,9 +73,7 @@ export default {
       transports: ['websocket']
     })
     // 与服务器建立连接的事件
-    this.socket.on('connect', () => {
-      console.log('与服务器连接成功')
-    })
+    this.socket.on('connect', () => {})
     // 接收服务器端传回来的消息
     this.socket.on('message', data => {
       // 把服务器发送过来的消息，存储到list数组中

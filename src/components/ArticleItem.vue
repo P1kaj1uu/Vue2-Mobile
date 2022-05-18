@@ -8,30 +8,30 @@
           <!-- 标题 -->
           <span>{{ obj.title }}</span>
           <!-- 单图 -->
-          <!-- <img
+          <img
             class="thumb"
-            :src="obj.cover.images[0]"
+            v-lazy="obj.cover.images[0]"
             v-if="obj.cover.type === 1"
-          /> -->
-          <van-image class="thumb" :src="obj.cover.images[0]" v-if="obj.cover.type === 1">
+          />
+          <!-- <van-image class="thumb" :src="obj.cover.images[0]" v-if="obj.cover.type === 1">
             <template v-slot:error>暂无图片</template>
-          </van-image>
+          </van-image> -->
         </div>
         <!-- 三张图片 -->
         <div class="thumb-box" v-if="obj.cover.type > 1">
-          <!-- <img
+          <img
             class="thumb"
             v-for="(imgUrl, index) in obj.cover.images"
             :key="index"
-            :src="imgUrl"
-          /> -->
-          <van-image
+            v-lazy="imgUrl"
+          />
+          <!-- <van-image
           class="thumb"
           v-for="(imgUrl, index) in obj.cover.images"
           :key="index"
           :src="imgUrl">
             <template v-slot:error>暂无图片</template>
-          </van-image>
+          </van-image> -->
         </div>
       </template>
       <!-- label 区域的插槽 -->
@@ -95,7 +95,6 @@ export default {
       // 默认情况下点击选项时不会自动收起
       if (action.name === '不感兴趣') {
         const res = await articleDislikeAPI(this.obj.art_id)
-        console.log(res)
         if (res.status === 201) {
           Notify({ type: 'success', message: '反馈成功' })
         } else {
@@ -110,7 +109,6 @@ export default {
           target: this.obj.art_id,
           type: action.value
         })
-        console.log(res)
         if (res.status === 201) {
           Notify({ type: 'success', message: '举报成功' })
         } else {

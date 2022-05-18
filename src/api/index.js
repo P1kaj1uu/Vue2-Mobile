@@ -308,3 +308,13 @@ export const editUserDataAPI = ({ name, gender, birthday, real_name, intro }) =>
     intro
   }
 })
+
+// 刷新用户token
+export const refreshTokenAPI = () => axios({
+  url: '/v1_0/authorizations',
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Bearer ' + localStorage.getItem('refresh_token')
+  }
+})

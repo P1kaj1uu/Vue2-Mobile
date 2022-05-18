@@ -74,7 +74,6 @@ export default {
   },
   async created () {
     const res = await getAllChannelsAPI()
-    console.log(res)
     if (res.status === 200) {
       this.allChannelList = res.data.data.channels
     }

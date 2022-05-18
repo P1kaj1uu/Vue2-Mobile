@@ -1,6 +1,9 @@
 <template>
  <div>
-   <router-view></router-view>
+   <!-- 组件缓存 -->
+   <keep-alive exclude="Search,SearchResult,ArticleDetail,UserEdit,UserFan,UserFollow">
+     <router-view></router-view>
+   </keep-alive>
  </div>
 </template>
 
@@ -21,8 +24,7 @@ export default {
   async created () {
     // try+catch 捕获错误异常
     try {
-      const res = await getAllChannelsAPI()
-      console.log(res)
+      await getAllChannelsAPI()
     } catch (err) {
       console.log(err)
     }

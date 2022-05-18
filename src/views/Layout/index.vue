@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="home_container">
-      <!-- 二级路由页面 -->
-      <router-view></router-view>
+      <!-- 组件缓存 -->
+      <keep-alive>
+        <!-- 二级路由页面 -->
+        <router-view></router-view>
+      </keep-alive>
     </div>
 
     <!-- 下面的底部导航 -->

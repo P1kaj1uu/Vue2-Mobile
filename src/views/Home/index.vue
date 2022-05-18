@@ -13,7 +13,7 @@
     </div>
     <!-- tab栏导航区域 -->
     <div class="homeTab">
-      <van-tabs v-model="channelId" sticky animated offset-top="1.226667rem">
+      <van-tabs v-model="channelId" sticky animated offset-top="1.226667rem" @change="tabsChangeFn" >
         <van-tab v-for="item in userChannelList" :key="item.id" :title="item.name" :name="item.id">
           <article-list :cid="channelId"></article-list>
         </van-tab>
@@ -55,14 +55,15 @@ export default {
       channelId: 0,
       // 用于存储用户频道数据
       userChannelList: [],
-      show: false
+      show: false,
+      // 频道切换，保存每个频道的滚动位置=>{ 频道ID: 滚动位置 }
+      channelScrollTObj: {}
     }
   },
   async created () {
     const res = await getUserChannelAPI()
     if (res.status === 200) {
       this.userChannelList = res.data.data.channels
-      console.log(res)
     }
   },
   methods: {
@@ -79,20 +80,18 @@ export default {
     // 添加频道
     async addFn (channelObj) {
       this.userChannelList.push(channelObj)
-      const res = await updateChannelAPI({
+      await updateChannelAPI({
         channels: this.userChannelList
       })
-      console.log(res)
     },
     // 删除频道
     async removeFn (channelObj) {
       const index = this.userChannelList.findIndex(obj => obj.id === channelObj.id)
       this.userChannelList.splice(index, 1)
       // 调用删除频道的api
-      const res = await deleteChannelAPI({
+      await deleteChannelAPI({
         target: channelObj.id
       })
-      console.log(res)
     },
     // 跳转对应的频道内容
     changeFn (obj) {
@@ -101,7 +100,31 @@ export default {
     // 点击搜索图标跳转搜索页面
     ToSearch () {
       this.$router.push('/search')
+    },
+    // 封装滚动条滚动事件
+    scrollFn () {
+      this.$route.meta.scrollT = document.documentElement.scrollTop
+      // 同时保存当前频道的滚动位置
+      this.channelScrollTObj[this.channelId] = document.documentElement.scrollTop
+    },
+    // 当tab选项栏频道切换时
+    tabsChangeFn () {
+      this.$nextTick(() => {
+        window.scrollTo(0, this.channelScrollTObj[this.channelId])
+      })
     }
+  },
+  // 使用缓存组件后，激活生命周期函数触发
+  activated () {
+    // 实时监听滚动事件
+    window.addEventListener('scroll', this.scrollFn)
+    // 切换到离开前滚动条的位置
+    window.scrollTo(0, this.$route.meta.scrollT)
+  },
+  // 使用缓存组件后，失去激活生命周期函数触发
+  deactivated () {
+    // 移除全局注册的事件
+    window.removeEventListener('scroll', this.scrollFn)
   }
 }
 </script>

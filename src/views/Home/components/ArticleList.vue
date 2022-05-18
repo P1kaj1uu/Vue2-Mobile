@@ -78,7 +78,6 @@ export default {
           this.finished = true
         }
       }
-      console.log(res)
     },
     // 下拉刷新事件
     onRefresh () {
@@ -105,7 +104,6 @@ export default {
       // pre_timestamp是下一段文章开头的时间戳
       this.theTime = res.data.data.pre_timestamp
     }
-    console.log(res)
   }
 }
 </script>

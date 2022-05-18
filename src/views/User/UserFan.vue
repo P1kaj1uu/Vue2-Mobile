@@ -53,7 +53,6 @@ export default {
     const res = await getUserFanAPI()
     if (res.status === 200) {
       this.userFanList = res.data.data.results
-      console.log(res)
       // 当暂无粉丝时
       if (res.data.data.results.length === 0) {
         this.loading = false

@@ -53,7 +53,6 @@ export default {
     const res = await getUserFollowedAPI()
     if (res.status === 200) {
       this.userFollowList = res.data.data.results
-      console.log(res)
       // 当暂无关注时
       if (res.data.data.results.length === 0) {
         this.loading = false
