@@ -1,24 +1,100 @@
-# vue_mobile
+## Vue2移动端项目
 
-## Project setup
-```
-npm install
-```
+#### 一、项目概要
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+##### **1.项目接口文档**
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[在线地址](http://geek.itheima.net/api.html)
 
-### Lints and fixes files
-```
-npm run lint
-```
+##### **2.项目介绍**
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+该项目类似于*今日头条*，是一个IT资讯移动web移动端应用，后期可结合H5+可在Dcloud打包成一款体验较好的手机应用。
+
+其具有的主要功能有：资讯列表、标签页切换，文章举报，频道管理、文章详情、关注功能、点赞功能、评论功能、搜索功能、登录功能、个人中心、查看关注列表、查看粉丝列表、编辑资料、小思同学。
+
+##### **3.项目包介绍**
+
+生产环境的包
+
+| 包名             | 概念           |
+| ---------------- | -------------- |
+| vue              | 核心vue        |
+| vue-router       | 路由管理插件   |
+| axios            | 网络请求插件   |
+| vant             | 移动组件库     |
+| socket.io-client | 即时通讯库     |
+| amfe-flexible    | flexiblejs适配 |
+
+开发环境的包
+
+| 包名            | 概念                                 |
+| --------------- | ------------------------------------ |
+| babel           | ES语法转换器                         |
+| less            | css预处理器                          |
+| vue-cli         | vue项目脚手架包                      |
+| postcss         | css语法转换器(后处理器)              |
+| postcss-pxtorem | 把px自动转rem插件(需要配合webpack用) |
+
+##### 4.项目技术栈
+
+* vuejs中
+  * $nextTick使用 (vue更新DOM是异步的)
+  * 组件通信 (父, 子传递)
+  * async和await用法
+  * keep-alive 组件缓存
+* vue-router
+  * 懒加载 (对打包以后首页加载速度有提高)
+* axios
+  * 请求和响应拦截器
+  * 封装请求工具方法 (代码分层)
+* vant
+  * 对组件使用更熟悉
+  * 掌握使用和查阅文档的能力
+* socket.io-client
+  * http协议复习 (请求报文和响应报文)
+  * 与ajax区别
+  * ajax和socket之间的选择
+* amfe-flexible
+  * 移动端rem适配
+
+
+
+#### 二、Git存储
+
+以master为主分支，其分出多分支模块化开发。
+
+
+
+#### 三、项目优化
+
+##### 1.使用路由懒加载
+
+- 目的：减少第一页面的app.js的大小，加快进入页面的速度。当某一个路由被访问时，才加载对应的组件。增加用户的体验。
+
+##### 2.使用图片懒加载
+
+- 目的：减少服务器压力，避免一次请求全部的图片，加快打开页面的速度，增加用户的体验。
+- 使用Vant组件库封装的v-lazy图片懒加载，并设置预加载高度的比例和错误时的图片。
+- 只有当图片标签进入视口才加载相应的图片，才请求相应的图片资源。
+
+##### 3.无感知刷新更新token，增加用户体验
+
+- 在登录时，保存token的同时，同时保存刷新token的refresh_token。
+- 当token过期时，移除token，然后refresh_token替换给token，再重新生成refresh_token，实现用户无感知刷新token，增加用户体验。
+- (情况较少)只有当token和refresh_token都过期时，才强制用户跳转至登录页面，进行重新登录，获取新的token和refresh_token。
+- 综上以上情况，不论是token过期，还是refresh_token也过期，用户都会停留在当前的界面，减少用户不必要的跳转查找操作，进一步的增加用户体检。
+
+##### 4.路由前置全局守卫，axios请求响应拦截器
+
+##### 5.使用keep-alive组件缓存
+
+- 目的：防止组件频繁创建和销毁，同时也防止网络请求重复无用执行。
+- 细节：在一级路由中，用exclude排除部分组件不缓存。
+
+##### 6.文章详情页面优化
+
+- 情况1：当网速较差时，在点击进入文章详情页面后，顶部出现loading加载中的效果，增加用户体验。
+- 情况2：当文章详情页面出现代码时，让代码高亮显示，从视觉差上给用户不一样的体验。
+- 情况3：当用户想快速查看评论内容时，点击评论小图标，srollview以动画的形式滚动到一条评论内容的位置，节约用户向下滚动滚动条的时间，增加用户体验。
+
+##### 7.切换tab栏与频道时，滚动条位置优化
